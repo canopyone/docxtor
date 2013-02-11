@@ -1,9 +1,64 @@
 = docxtor
 
-Description goes here.
+Docxtor is a Ruby library for generating .docx files from html templates. The main idea behind it is using your existing html document and convert it to different format without change.
+
+== Installation
+
+    gem install docxtor
+
+== Usage
+
+From your code:
+
+    docxtor = Docxtor::Generator.new <options>
+    docxtor.from_html <template>, <path to generated file>
+
+=== Available options
+
+* +toc+
+
+  Creates a table of contents for a document.
+
+  Examples:
+
+    Docxtor::Generator.new :toc => 'h1' # Use 'h1' tags as chapter headers
+    Docxtor::Generator.new :toc => '#myheader' # Use elements with +id="myheader"+ as chapter headers
+    Docxtor::Generator.new :toc => ['h1', 'h2'] # Use +h1+ and +h2+ elements as chapter headers of the same level
+    Docxtor::Generator.new :toc => {'h1' => 'h2'} # Use +h1+ elements as level 1 headers and +h2+ elements as level 2 headers
+
+
+* +pagenum+
+
+  Inserts page numbers in generated document.
+
+  Examples:
+
+    Docxtor::Generator.new :pagenum => {:vertical => "top", :horizontal => "right"} # Insert page number in the upper right corner of the page
+    Docxtor::Generator.new :pagenum => {:vertical => "bottom", :horizontal => "center", :nofirst => true} # Insert page number in the middle of the page at the bottom. Don't insert number on a first page
+
+* +header+
+
+  Defines header element for every page.
+
+  Examples:
+
+    Docxtor::Generator.new :header => "#myheader" # Contents of the element with +id="myheader"+ will appear in header of every page.
+
+* +footer+
+
+  Same as header, but for the page's footer.
+
+  Examples:
+
+    Docxtor::Generator.new :footer => "#myfooter"
+
+== TODO list
+
+- XML templates;
+- Pictures in documents.
 
 == Contributing to docxtor
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
