@@ -5,6 +5,7 @@ source "http://rubygems.org"
 
 gem 'builder'
 gem 'nokogiri'
+gem 'rubytree'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
