@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gem 'builder'
 gem 'nokogiri'
 gem 'rubytree'
+gem 'rubyzip'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
@@ -15,4 +16,5 @@ group :development do
   gem "jeweler"
   gem "rcov", ">= 0"
   gem "mocha", :require => false
+  gem "pry"
 end
