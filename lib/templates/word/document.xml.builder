@@ -9,5 +9,7 @@ xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compati
                  "xmlns:w10" => "urn:schemas-microsoft-com:office:word",
                  "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
                  "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do |xml|
-  document.each {|element| place element, xml}
+  xml.w :body do |xml|
+    root.children.each {|element| place element, xml}
+  end
 end
