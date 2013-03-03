@@ -1,12 +1,11 @@
 require 'helper'
 
-class TestDocxtor < Test::Unit::TestCase
+class TestDocxtorGenerator < Test::Unit::TestCase
   context "Generating from html" do
     setup do
       @docxtor = Docxtor::Generator.new
 
-      # TODO: change to reading from sample template file
-      @template = "<html><body><div id='content'>Hello, docxtor!</div></body></html>"
+      @template = File.read(File.join(File.dirname(__FILE__), 'support', 'template.html'))
       @path = "./test.docx"
     end
 
@@ -24,8 +23,9 @@ class TestDocxtor < Test::Unit::TestCase
 
     context "#generate" do
       should "generate .docx file from html" do
-        parser = Docxtor::HTMLParser.new
-        parser_output = {:content => "Hello, docxtor!"}
+        parser = Docxtor::Parser::HTML.new
+        # TODO parser output is wrong!
+        parser_output = {:document => "Hello, docxtor!"}
         parser.expects(:parse).with(@template).returns(parser_output)
 
         builder = Docxtor::Builder.new
