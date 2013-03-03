@@ -41,3 +41,4 @@ pkg
 # For vim:
 #*.swp
 .rbenv*
+.DS_Store
