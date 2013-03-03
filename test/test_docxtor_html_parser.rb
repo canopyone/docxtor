@@ -3,8 +3,7 @@ require 'helper'
 class TestDocxtorHTMLParser < Test::Unit::TestCase
   context "Parsing html template" do
     setup do
-      @parser = Docxtor::HTMLParser.new
-      @template = File.read(File.join(File.dirname(__FILE__), 'support', 'template.html'))
+      @parser = Docxtor::Parser::HTML.new
       @doc = Nokogiri::HTML(@template)
     end
 
@@ -13,20 +12,40 @@ class TestDocxtorHTMLParser < Test::Unit::TestCase
     end
 
     context "#parse" do
-      should "extract context variables from html template" do
-        assert_equal({:document => [{:h1 => ["Heading"]}, {:p => [{:run => ["Hello, docxtor!"]}, {:p => ["Nice to meet you!"]}]}]}, @parser.parse(@template))
-      end
-    end
+      context "with minimal document" do
+        setup do
+          template = "<html><body></body></html>"
+          @result = @parser.parse(template)
+        end
 
-    context "#paragraph?" do
-      should "define whether given node should be translated to paragraph element" do
-        assert @parser.paragraph? @doc.css('div')[0]
-      end
-    end
+        should "contain a document part" do
+          assert @result[:document]
+        end
 
-    context "#heading?" do
-      should "define wheter given node should be translated to heading element" do
-        assert @parser.heading? @doc.css('h1')[0]
+        should "return a root node of resulting tree in document part" do
+          assert_equal @result[:document].name, "root"
+        end
+      end
+
+      context "with simple paragraph" do
+        should "translate simple paragraph to .docx paragraph" do
+          template = "<html><body><p>Paragraph</p></body></html>"
+          result = @parser.parse(template)
+
+          text = result[:document].children.find {|node| node.name == :p}.
+            children.find {|node| node.name == :r}.
+            children.find {|node| node.name == :t}.attributes[:text]
+          assert_equal 'Paragraph', text
+        end
+      end
+
+      context "with nested paragraph" do
+        should "translate nested paragraphs to simple .docx paragraphs" do
+          template = "<html><body><div>Outer div<p>Inner paragraph</p></div></body></html>"
+          result = @parser.parse(template)
+
+          assert_equal 2, result[:document].children.select {|node| node.name == :p}.count
+        end
       end
     end
   end
