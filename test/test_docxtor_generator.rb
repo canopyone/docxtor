@@ -15,6 +15,7 @@ class TestDocxtorGenerator < Test::Unit::TestCase
 
     context "#from_html" do
       should "accept template and path arguments" do
+        @docxtor.expects(:save).returns(true)
         assert_block do
           @docxtor.from_html @template, @path
         end
