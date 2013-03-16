@@ -15,27 +15,17 @@ module Docxtor
         doc = Nokogiri::HTML(template)
         body = doc.css('body')[0]
 
-        extract_document body, root
+        body.xpath("//text()").each {|text| root << convert(text)}
 
         {:document => root}
       end
 
-      def extract_document element_parent, node_parent
-        element_parent.children.each do |element|
-          node_parent << convert(element)
-        end
-      end
-
       def convert element
         options = {}
+        # options = extract_options(element.parent)
 
-        # TODO: Paragraph style when element is heading
-
-        node = Parser::Node.new :p, options
-
-        if element.element_children.empty?
-          node << Parser::Node.new(:r) << Parser::Node.new(:t, {:text => element.text})
-        end
+        node = Parser::Node.new(:p, options)
+        node << Parser::Node.new(:r) << Parser::Node.new(:t, {:text => element.text})
 
         node
       end
