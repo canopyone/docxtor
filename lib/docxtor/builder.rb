@@ -15,6 +15,7 @@ module Docxtor
       build_rels
       build_content_types
       build_document
+      # build_styles
 
       package
     end
@@ -38,9 +39,15 @@ module Docxtor
       package["word/document.xml"] = eval(template)
     end
 
+    def build_styles
+      xml = ::Builder::XmlMarkup.new
+      template = File.read(File.join @templates_dir, 'word', 'styles.xml.builder')
+      package["word/styles.xml"] = eval(template)
+    end
+
     def place element, xml
       if element.children.empty?
-        xml.w element.name.to_sym, element.attributes[:text]
+        xml.w element.name.to_sym, element.attributes, element.content
       else
         xml.w element.name.to_sym do |xml|
           element.children.each {|child| place child, xml }
