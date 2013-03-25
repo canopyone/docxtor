@@ -12,7 +12,7 @@ class TestDocxtorBuilder < Test::Unit::TestCase
 
     should "create a string with main document body" do
       root = Docxtor::Parser::Node.new "root"
-      root << Docxtor::Parser::Node.new(:p) << Docxtor::Parser::Node.new(:r) << Docxtor::Parser::Node.new(:t, {:text => "Hi"})
+      root << Docxtor::Parser::Node.new(:p) << Docxtor::Parser::Node.new(:r) << Docxtor::Parser::Node.new(:t, {:content => "Hi"})
       context = {:document => root}
 
       files = @builder.build context

@@ -15,19 +15,9 @@ module Docxtor
         doc = Nokogiri::HTML(template)
         body = doc.css('body')[0]
 
-        body.xpath("//text()").each {|text| root << convert(text)}
+        body.xpath("//text()").each {|text| root << Document::Paragraph.new(text).paragraph}
 
         {:document => root}
-      end
-
-      def convert element
-        options = {}
-        # options = extract_options(element.parent)
-
-        node = Parser::Node.new(:p, options)
-        node << Parser::Node.new(:r) << Parser::Node.new(:t, {:text => element.text})
-
-        node
       end
     end
   end

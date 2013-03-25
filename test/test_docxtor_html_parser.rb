@@ -34,7 +34,7 @@ class TestDocxtorHTMLParser < Test::Unit::TestCase
 
           text = result[:document].children.find {|node| node.name == :p}.
             children.find {|node| node.name == :r}.
-            children.find {|node| node.name == :t}.attributes[:text]
+            children.find {|node| node.name == :t}.content
           assert_equal 'Paragraph', text
         end
       end
