@@ -44,7 +44,9 @@ class TestDocxtorHTMLParser < Test::Unit::TestCase
           template = "<html><body><div>Outer div<p>Inner paragraph</p></div></body></html>"
           result = @parser.parse(template)
 
-          assert_equal 2, result[:document].children.select {|node| node.name == :p}.count
+          assert_equal "Outer div", result[:document].children.select {|node| node.name == :p}.first.
+            children.find {|node| node.name == :r }.
+            children.find {|node| node.name == :t}.content
         end
       end
 

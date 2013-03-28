@@ -9,13 +9,13 @@ class TestDocxtorDocumentParagraph < Test::Unit::TestCase
     end
 
     should "create Parser::Node element with children representing docx paragraph" do
-      paragraph = Docxtor::Document::Paragraph.new @paragraph
+      paragraph = Docxtor::Document::Paragraph.new @paragraph, ""
 
       assert_equal :p, paragraph.paragraph.name
     end
 
     should "create heading parapgraph from heading element" do
-      heading = Docxtor::Document::Paragraph.new @heading
+      heading = Docxtor::Document::Paragraph.new @heading, ""
 
       assert_equal "h1", heading.paragraph.children.first.children.
         find {|property| property.name == :pStyle}.

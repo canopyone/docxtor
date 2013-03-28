@@ -3,7 +3,7 @@ module Docxtor
     class Paragraph
       attr_accessor :paragraph
 
-      def initialize element
+      def initialize element, text
         @element = element
 
         @paragraph = Parser::Node.new(:p)
@@ -12,7 +12,7 @@ module Docxtor
         run = Parser::Node.new(:r)
         run << run_options if run_options
 
-        @paragraph << run << Parser::Node.new(:t, {:content => element.text})
+        @paragraph << run << Parser::Node.new(:t, {:content => text})
       end
 
       private
