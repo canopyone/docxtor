@@ -21,6 +21,7 @@ module Docxtor
         if @element.name == "h1"
           pPr = Parser::Node.new(:pPr)
           pPr << Parser::Node.new(:spacing, {"w:before" => "120", "w:after" => "240"})
+          pPr << Parser::Node.new(:pStyle, {"w:val" => "h1"})
         end
         pPr
       end

@@ -47,6 +47,17 @@ class TestDocxtorHTMLParser < Test::Unit::TestCase
           assert_equal 2, result[:document].children.select {|node| node.name == :p}.count
         end
       end
+
+      context "with heading element" do
+        should "translate heading element to paragraph with heading properties" do
+          template = "<html><body><h1>Heading</h1></body></html>"
+          result = @parser.parse(template)
+
+          assert_equal "h1", result[:document].children.first.children.
+            find {|child| child.name == :pPr}.children.
+            find {|property| property.name == :pStyle}.attributes["w:val"]
+        end
+      end
     end
   end
 end

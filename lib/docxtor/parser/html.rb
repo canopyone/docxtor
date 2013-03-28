@@ -15,7 +15,7 @@ module Docxtor
         doc = Nokogiri::HTML(template)
         body = doc.css('body')[0]
 
-        body.xpath("//text()").each {|text| root << Document::Paragraph.new(text).paragraph}
+        body.xpath("//text()").each {|text| root << Document::Paragraph.new(text.parent).paragraph}
 
         {:document => root}
       end
