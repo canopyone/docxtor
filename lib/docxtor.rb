@@ -2,10 +2,7 @@ require 'builder'
 
 require 'nokogiri/xml/element'
 
-require 'docxtor/generator'
-require 'docxtor/parser/node'
-require 'docxtor/parser/html'
-require 'docxtor/builder'
+Dir["#{File.dirname(__FILE__)}/**/*.rb"].each { |f| require f }
 
 module Docxtor
 end
