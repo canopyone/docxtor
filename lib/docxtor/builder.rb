@@ -15,7 +15,7 @@ module Docxtor
       build_rels
       build_content_types
       build_document
-      # build_styles
+      build_styles
 
       package
     end
