@@ -12,37 +12,16 @@ module Docxtor
       @templates_dir = File.join(File.dirname(__FILE__), '..', 'templates')
       @package = {}
 
-      build_rels
-      build_content_types
-      build_document
-      build_styles
+      Dir["#{File.dirname(__FILE__)}/../templates/**/{*,.*}.builder"].each { |filename| build_file filename }
 
       package
     end
 
-    def build_rels
-      xml = ::Builder::XmlMarkup.new
-      template = File.read(File.join @templates_dir, '_rels', '.rels.builder')
-      package["_rels/.rels"] = eval(template)
-    end
-
-    def build_content_types
-      xml = ::Builder::XmlMarkup.new
-      template = File.read(File.join @templates_dir, '[Content_Types].xml.builder')
-      package["[Content_Types].xml"] = eval(template)
-    end
-
-    def build_document
+    def build_file filename
       xml = ::Builder::XmlMarkup.new
       root = context[:document]
-      template = File.read(File.join @templates_dir, 'word', 'document.xml.builder')
-      package["word/document.xml"] = eval(template)
-    end
-
-    def build_styles
-      xml = ::Builder::XmlMarkup.new
-      template = File.read(File.join @templates_dir, 'word', 'styles.xml.builder')
-      package["word/styles.xml"] = eval(template)
+      template = File.read filename
+      package[filename.gsub(/^.*templates\//, "").gsub(".builder", "")] = eval(template)
     end
 
     def place element, xml
