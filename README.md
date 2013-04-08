@@ -9,15 +9,9 @@
 
 ### Options
 
-To define document options and additional elements like page numbers you can pass parameters hash to constructor or use attribute accessors.
+To define document options and additional elements like page numbers you can pass parameters hash to constructor.
 
-    generator = Docxtor::Generator.new {:footer => {:content => {:odd => :pagenum}, :align => :center}}
-
-or
-
-    generator.footer.content = {:odd => :pagenum}
-    generator.footer.align = :center
-
+    generator = Docxtor::Generator.new {:footer => {:content => :pagenum, :align => :center}}
 
 ### List of available options
 
@@ -25,40 +19,26 @@ or
 
 **Attributes**:
 
-All attributes for header/footer can be symbols, strings or hashes. In the hash you can define to which pages the option will be applied: `:odd`, `:even` or `:first`. If a string or a symbol is passed it will be used in all document pages by default.
-
 - `content` - defines content of the footer/header.
 
   **Values**:
 
   - `:pagenum` - Insert page number
 
-  - `<tag name>` - Insert content of the html tag
-
   - `<text>` - Insert text
 
   **Examples**:
 
-  * Create header for odd pages with text "Foo"
+  * Create header with text "Foo"
 
-        generator = Docxtor::Generator.new {:header => {:content => {:odd => "Foo"}}}
+        generator = Docxtor::Generator.new {:header => {:content => "Foo"}}
 
-    or
-
-        generator = Docxtor::Generator.new
-        generator.header.content = {:odd => "Foo"}
-
-  * Create footer with page numbers on all pages, centered by default.
+  * Create footer with page numbers on all pages, aligned by left by default.
 
         generator = Docxtor::Generator.new {:footer => {:content => :pagenum}}
 
-    or
 
-        generator = Docxtor::Generator.new
-        generator.footer.content = :pagenum
-
-
-- `align` - `:left`, `:right` or `:center`. Align footer or header content horizontally. Default value: `:center`.
+- `align` - `:left`, `:right` or `:center`. Align footer or header content horizontally. If no `:align` options provided, content aligned by left.
 
   **Examples**:
 
@@ -66,27 +46,17 @@ All attributes for header/footer can be symbols, strings or hashes. In the hash 
 
         generator = Docxtor::Generator.new {:footer => {:content => "Foo", :align => :left}}
 
-    or
+  * Create header with page numbers, center aligned.
 
-        generator = Docxtor::Generator.new
-        generator.footer.content = "Foo"
-        generator.footer.align = left
-
-  * Create header with contents of the `#myheader` html tag on all pages left aligned on odd pages, center (default) aligned on even pages.
-
-        generator = Docxtor::Generator.new {:header => {:content => "#myheader", :align => {:odd => :left}}}
-
-    or
-
-        generator = Docxtor::Generator.new
-        generator.footer.content = "#myheader"
-        generator.footer.align = {:odd => :left}
+        generator = Docxtor::Generator.new {:header => {:content => :pagenum, :align => :center}}
 
 ## TODO
 
 - More document meta-info to insert into headers/footers, like author or chapter(?).
 - Generate tables.
 - Custom styles for headings and other elements.
+- HTML tags as footer/header content
+- Different footers/headers for first, odd and even pages. (Note that this option is implemented, but works weird with some consumers like LibreOffice. Take a look at the tests, if interested.)
 
 ## Contributing to docxtor
 
