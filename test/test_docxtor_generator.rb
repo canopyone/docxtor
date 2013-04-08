@@ -9,6 +9,14 @@ class TestDocxtorGenerator < Test::Unit::TestCase
       @path = "./test.docx"
     end
 
+    context "#initialize" do
+      should "take create page options from argument hash" do
+        docxtor = Docxtor::Generator.new({:footer => {:content => {:odd => "Foo"}}})
+
+        assert_instance_of Docxtor::Document::PageOptions, docxtor.page_options
+      end
+    end
+
     should "respond to #from_html" do
       assert_respond_to @docxtor, :from_html
     end
@@ -25,13 +33,10 @@ class TestDocxtorGenerator < Test::Unit::TestCase
     context "#generate" do
       should "generate .docx file from html" do
         parser = Docxtor::Parser::HTML.new
-        # TODO parser output is wrong!
-        parser_output = {:document => "Hello, docxtor!"}
-        parser.expects(:parse).with(@template).returns(parser_output)
 
         builder = Docxtor::Builder.new
         builder_output = {"[Content_Types].xml" => "Some file"}
-        builder.expects(:build).with(parser_output).returns(builder_output)
+        builder.expects(:build).returns(builder_output)
 
         @docxtor.expects(:save).returns(true)
         @docxtor.template = @template
