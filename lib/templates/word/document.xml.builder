@@ -10,6 +10,12 @@ xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compati
                  "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
                  "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do |xml|
   xml.w :body do |xml|
-    root.children.each {|element| place element, xml}
+    @root.children.each {|element| place element, xml}
+
+    xml.w :sectPr do |xml|
+      page_options.headers_footers.each do |hf|
+        xml.w hf.reference_name, "r:id" => hf.reference_id, "w:type" => "#{hf.pages}"
+      end if page_options && page_options.headers_footers
+    end
   end
 end
