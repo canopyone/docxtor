@@ -10,10 +10,8 @@ xml.w :document, "xmlns:ve" => "http://schemas.openxmlformats.org/markup-compati
                  "xmlns:w" => "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
                  "xmlns:wne" => "http://schemas.microsoft.com/office/word/2006/wordml" do |xml|
   xml.w :body do |xml|
-    xml.w :p do |xml|
-      xml.w :r do |xml|
-        xml.w :t, "Hi"
-      end
+    xml.w :sectPr do |xml|
+      xml.w :footerReference, "r:id" => "rId2", "w:type" => "first"
     end
   end
 end
