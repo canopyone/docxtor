@@ -2,6 +2,8 @@
 
 `Docxtor` is a Ruby library for generating `docx` documents from `html` templates.
 
+`master` branch works with Ruby **1.8.7**. For **1.9** compatible version checkout `1.9` branch.
+
 ## Usage
 
     generator = Docxtor::Generator.new <options>
