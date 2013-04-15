@@ -14,7 +14,7 @@ group :development do
   gem "shoulda", ">= 0"
   gem "bundler"
   gem "jeweler"
-  gem "rcov", ">= 0"
+  gem "simplecov", ">= 0"
   gem "mocha", :require => false
   gem "pry"
 end
