@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "docxtor"
   gem.homepage = "http://github.com/jafrog/docxtor"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Ruby docx generator}
+  gem.description = %Q{Ruby docx generator}
   gem.email = "howeveririna@gmail.com"
   gem.authors = ["jafrog"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
