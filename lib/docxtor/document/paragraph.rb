@@ -29,6 +29,7 @@ module Docxtor
       def run_options
         if @element.name == "h1"
           rPr = Parser::Node.new(:rPr)
+          rPr << Parser::Node.new(:b)
           rPr << Parser::Node.new(:sz, {"w:val" => "32"})
           rPr << Parser::Node.new(:szCs, {"w:val" => "32"})
         end
