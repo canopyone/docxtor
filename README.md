@@ -52,6 +52,11 @@ To define document options and additional elements like page numbers you can pas
 
         generator = Docxtor::Generator.new {:header => {:content => :pagenum, :align => :center}}
 
+## What works now
+
+Resulting `.docx`s have been tested on LibreOffice and Google Docs. LibreOffice doesn't apply styles defined in `styles.xml` to paragraphs and recognizes only properties defined in the body of a document. Google Docs doesn't open generated files at all.
+
+
 ## TODO
 
 - More document meta-info to insert into headers/footers, like author or chapter(?).
