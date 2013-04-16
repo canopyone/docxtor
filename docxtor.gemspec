@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["jafrog"]
   s.date = %q{2013-04-16}
-  s.description = %q{Ruby docx generator }
+  s.description = %q{TODO: longer description of your gem}
   s.email = %q{howeveririna@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "docxtor.gemspec",
     "lib/docxtor.rb",
     "lib/docxtor/builder.rb",
     "lib/docxtor/document/footer.rb",
@@ -61,7 +62,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Ruby docx generator}
+  s.summary = %q{TODO: one-line summary of your gem}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
